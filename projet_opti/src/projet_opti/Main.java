@@ -10,9 +10,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
-
+	
+	
 	public static void main(String[] args) throws IOException {
+		List<Objet> listObjet = new ArrayList<>();
+		List<Incompatibilite> listIncompatibilite = new ArrayList<>();
+		Sac sac = new Sac();
 		File f = new File("../projet_opti/conf/1I1");
+		litFichierEtInitObjets(f, listObjet, listIncompatibilite, sac);
+		System.out.println("Objets initialisés");
+	}	
+	
+	private static void litFichierEtInitObjets(File f, List<Objet> listObjet, List<Incompatibilite> listIncompatibilite, Sac sac) throws IOException {
 		InputStream fichier = new FileInputStream(f);
 		InputStreamReader lecture = new InputStreamReader(fichier);
 		BufferedReader buff=new BufferedReader(lecture);
@@ -20,9 +29,6 @@ public class Main {
 		String separateur = " ";
 		List<Integer> datasPoids = new ArrayList<>();
 		List<Integer> datasValeurs = new ArrayList<>();
-		List<Objet> listObjet = new ArrayList<>();
-		List<Incompatibilite> listIncompatibilite = new ArrayList<>();
-		Sac sac = new Sac();
 		int compteur_incomp = 0;
 		int compteur = 0; // compteur nous permettant de savoir dans quel bloc nous nous trouvons
 		while ((ligne=buff.readLine())!=null){
@@ -75,6 +81,6 @@ public class Main {
 			listObjet.get(i).setValeur(datasValeurs.get(i));
 		}
 		buff.close(); 
-	}	
+	}
 }
 
