@@ -13,12 +13,14 @@ public class Main {
 	
 	
 	public static void main(String[] args) throws IOException {
+		long start = System.currentTimeMillis();
 		List<Objet> listObjet = new ArrayList<>();
 		List<Incompatibilite> listIncompatibilite = new ArrayList<>();
 		Sac sac = new Sac();
-		File f = new File("../projet_opti/conf/1I1");
+		File f = new File("../projet_opti/conf/1I1");	
 		litFichierEtInitObjets(f, listObjet, listIncompatibilite, sac);
-		System.out.println("Objets initialisés");
+		long stop = System.currentTimeMillis();
+		System.out.println("Soltion trouvée en "+ (stop - start) + " ms");
 	}	
 	
 	private static void litFichierEtInitObjets(File f, List<Objet> listObjet, List<Incompatibilite> listIncompatibilite, Sac sac) throws IOException {
