@@ -3,6 +3,7 @@ package projet_opti;
 public class Objet {
 	private int poids;
 	private int valeur;
+	private boolean dansSac;
 	
 	public Objet() {
 		super();
@@ -22,5 +23,12 @@ public class Objet {
 
 	public void setValeur(int valeur) {
 		this.valeur = valeur;
+	}
+	
+	public boolean estDansSac() {
+		if (dansSac) {
+			return true;
+		}
+		return false;
 	}
 }
