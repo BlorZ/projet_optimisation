@@ -13,15 +13,17 @@ public class Solution {
 	Solution(List<Objet> _listObjets){
 		this.poids = 0;
 		this.valeur = 0;
-		this.listObjets = new ArrayList<>();
-		Collections.copy(listObjets, _listObjets);
+		this.listObjets = new ArrayList<Objet>(_listObjets);
+		//Collections.copy(listObjets, _listObjets);
+		this.evaluer();
 		
 	}
 
 	float calculPoids() {
 		float p = 0;
 		for (Objet o : listObjets) {
-			p += o.getPoids();
+			if (o.estDansSac())
+				p += o.getPoids();
 		}
 		return p;
 	}
@@ -29,7 +31,8 @@ public class Solution {
 	float calculValeur() {
 		float v = 0;
 		for (Objet o : listObjets) {
-			v += o.getValeur();
+			if (o.estDansSac())
+				v += o.getValeur();
 		}
 		return v;
 	}
@@ -40,10 +43,23 @@ public class Solution {
 	}
 	
 	boolean estRealisable(float poidsSac) {
+		//Voir après pour les incompatibilités
 		if (this.poids <= poidsSac) {
 			return true;
 		}
 		return false;
+	}
+	
+	public String toString() {
+		String s = "";
+		
+		for(Objet o : this.listObjets) {
+			s += o.toString() + "\n";
+		}
+		
+		s+="Poids : " + this.poids + " " + "Valeur : " + this.valeur; 
+		
+		return s;
 	}
 
 }

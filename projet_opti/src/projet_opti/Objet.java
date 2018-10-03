@@ -31,4 +31,10 @@ public class Objet {
 		}
 		return false;
 	}
+	
+	public String toString() {
+		String s = this.getPoids() + " " + this.getValeur() + " " + this.estDansSac();
+		return s;	
+	}
+	
 }

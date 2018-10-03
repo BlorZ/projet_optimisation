@@ -19,8 +19,12 @@ public class Main {
 		Sac sac = new Sac();
 		File f = new File("../projet_opti/conf/1I1");	
 		litFichierEtInitObjets(f, listObjet, listIncompatibilite, sac);
+		
+		Solution s = new Solution(listObjet);
+		System.out.println(s);
+		
 		long stop = System.currentTimeMillis();
-		System.out.println("Soltion trouvée en "+ (stop - start) + " ms");
+		System.out.println("Solution trouvée en "+ (stop - start) + " ms");
 	}	
 	
 	private static void litFichierEtInitObjets(File f, List<Objet> listObjet, List<Incompatibilite> listIncompatibilite, Sac sac) throws IOException {
