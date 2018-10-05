@@ -24,6 +24,4 @@ public class Sac {
 	public void setPoidsMax(int poidsMax) {
 		this.poidsMax = poidsMax;
 	}
-	
-	
 }

@@ -15,10 +15,14 @@ public class Main {
 		Sac sac = new Sac();
 		File f = new File("../projet_opti/conf/1I1");	
 		MainInit.litFichierEtInitObjets(f, listObjet, listIncompatibilite, sac);
+		MainInit.triObjets(listObjet);
+		
+		Solution s = new Solution(listObjet);
+		//System.out.println(s);
+		System.out.println(s.estRealisable(sac.getPoidsMax(), listIncompatibilite));
+		
 		long stop = System.currentTimeMillis();
 		System.out.println("Solution trouvée en "+ (stop - start) + " ms");
-		MainInit.triObjets(listObjet);
 	}	
-	
 }
 

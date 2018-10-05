@@ -68,8 +68,8 @@ public class MainInit {
 			}
 			
 			if(compteur == 3) {// on est dans le 3e bloc => incompatibilités
-				listIncompatibilite.get(compteur_incomp).setObjet1(listObjet.get(Integer.parseInt(valeurs[1])-1));
-				listIncompatibilite.get(compteur_incomp).setObjet2(listObjet.get(Integer.parseInt(valeurs[2])-1));
+				listIncompatibilite.get(compteur_incomp).setObjet1(Integer.parseInt(valeurs[1])-1);
+				listIncompatibilite.get(compteur_incomp).setObjet2(Integer.parseInt(valeurs[2])-1);
 				compteur_incomp++;
 			}
 		}

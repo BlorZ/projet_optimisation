@@ -3,6 +3,7 @@ package projet_opti;
 public class Objet {
 	private int poids;
 	private Integer valeur;
+	private boolean dansSac;
 	
 	public Objet() {
 		super();
@@ -23,4 +24,21 @@ public class Objet {
 	public void setValeur(Integer valeur) {
 		this.valeur = valeur;
 	}
+	
+	public void setDansSac(Boolean valeur) {
+		this.dansSac = valeur;
+	}
+	
+	public boolean estDansSac() {
+		if (dansSac) {
+			return true;
+		}
+		return false;
+	}
+	
+	public String toString() {
+		String s = this.getPoids() + " " + this.getValeur() + " " + this.estDansSac();
+		return s;	
+	}
+	
 }
