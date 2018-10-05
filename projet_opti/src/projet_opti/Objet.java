@@ -2,7 +2,7 @@ package projet_opti;
 
 public class Objet {
 	private int poids;
-	private int valeur;
+	private Integer valeur;
 	
 	public Objet() {
 		super();
@@ -16,11 +16,11 @@ public class Objet {
 		this.poids = poids;
 	}
 
-	public int getValeur() {
+	public Integer getValeur() {
 		return valeur;
 	}
 
-	public void setValeur(int valeur) {
+	public void setValeur(Integer valeur) {
 		this.valeur = valeur;
 	}
 }

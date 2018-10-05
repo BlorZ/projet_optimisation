@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class Main {
@@ -20,9 +22,21 @@ public class Main {
 		File f = new File("../projet_opti/conf/1I1");	
 		litFichierEtInitObjets(f, listObjet, listIncompatibilite, sac);
 		long stop = System.currentTimeMillis();
-		System.out.println("Soltion trouvée en "+ (stop - start) + " ms");
+		System.out.println("Solution trouvée en "+ (stop - start) + " ms");
+		triObjets(listObjet);
+		System.out.println("zizi");
 	}	
 	
+	private static void triObjets(List<Objet> listObjet) {
+		Collections.sort(listObjet, new Comparator<Objet>() {
+		    @Override
+		    public int compare(Objet o1, Objet o2) {
+		        return o1.getValeur().compareTo(o2.getValeur());
+		    }
+		});
+		Collections.reverse(listObjet);
+	}
+
 	private static void litFichierEtInitObjets(File f, List<Objet> listObjet, List<Incompatibilite> listIncompatibilite, Sac sac) throws IOException {
 		InputStream fichier = new FileInputStream(f);
 		InputStreamReader lecture = new InputStreamReader(fichier);
