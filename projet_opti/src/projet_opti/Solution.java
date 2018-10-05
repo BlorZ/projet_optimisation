@@ -1,7 +1,6 @@
 package projet_opti;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Solution {
@@ -14,7 +13,6 @@ public class Solution {
 		this.poids = 0;
 		this.valeur = 0;
 		this.listObjets = new ArrayList<Objet>(_listObjets);
-		//Collections.copy(listObjets, _listObjets);
 		this.evaluer();
 		
 	}
@@ -42,12 +40,32 @@ public class Solution {
 		this.valeur = calculValeur();
 	}
 	
-	boolean estRealisable(float poidsSac) {
+	boolean estRealisable(float poidsSac, List<Incompatibilite> listIncompatibilite) {
 		//Voir après pour les incompatibilités
-		if (this.poids <= poidsSac) {
-			return true;
+		if (this.poids > poidsSac) {
+			return false;
 		}
-		return false;
+		
+		for (Incompatibilite i : listIncompatibilite) {
+			if ( (this.listObjets.get(i.getObjet1()).estDansSac()) && (this.listObjets.get(i.getObjet2()).estDansSac()) ) {
+				return false;
+			}
+		}
+		
+		return true;	
+	}
+	
+	public Solution genereVoisin() {
+		Solution newSol = new Solution(this.listObjets);
+		int i = (int) Math.random() * newSol.listObjets.size();
+		
+		if (newSol.listObjets.get(i).estDansSac()) {
+			newSol.listObjets.get(i).setDansSac(false);
+		}else {
+			newSol.listObjets.get(i).setDansSac(true);
+		}
+		
+		return newSol;
 	}
 	
 	public String toString() {

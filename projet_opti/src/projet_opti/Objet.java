@@ -25,6 +25,10 @@ public class Objet {
 		this.valeur = valeur;
 	}
 	
+	public void setDansSac(Boolean valeur) {
+		this.dansSac = valeur;
+	}
+	
 	public boolean estDansSac() {
 		if (dansSac) {
 			return true;
