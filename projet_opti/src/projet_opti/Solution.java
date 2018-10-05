@@ -58,6 +58,13 @@ public class Solution {
 	public Solution genereVoisin() {
 		Solution newSol = new Solution(this.listObjets);
 		int i = (int) Math.random() * newSol.listObjets.size();
+		
+		if (newSol.listObjets.get(i).estDansSac()) {
+			newSol.listObjets.get(i).setDansSac(false);
+		}else {
+			newSol.listObjets.get(i).setDansSac(true);
+		}
+		
 		return newSol;
 	}
 	
