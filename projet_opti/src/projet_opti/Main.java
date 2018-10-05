@@ -24,7 +24,6 @@ public class Main {
 		long stop = System.currentTimeMillis();
 		System.out.println("Solution trouvée en "+ (stop - start) + " ms");
 		triObjets(listObjet);
-		System.out.println("zizi");
 	}	
 	
 	private static void triObjets(List<Objet> listObjet) {
