@@ -22,6 +22,7 @@ public class Main {
 		
 		Solution s = new Solution(listObjet);
 		System.out.println(s);
+		System.out.println(s.estRealisable(sac.getPoidsMax(), listIncompatibilite));
 		
 		long stop = System.currentTimeMillis();
 		System.out.println("Solution trouvée en "+ (stop - start) + " ms");
@@ -73,8 +74,8 @@ public class Main {
 			}
 			
 			if(compteur == 3) {// on est dans le 3e bloc => incompatibilités
-				listIncompatibilite.get(compteur_incomp).setObjet1(listObjet.get(Integer.parseInt(valeurs[1])-1));
-				listIncompatibilite.get(compteur_incomp).setObjet2(listObjet.get(Integer.parseInt(valeurs[2])-1));
+				listIncompatibilite.get(compteur_incomp).setObjet1(Integer.parseInt(valeurs[1])-1);
+				listIncompatibilite.get(compteur_incomp).setObjet2(Integer.parseInt(valeurs[2])-1);
 				compteur_incomp++;
 			}
 		}
