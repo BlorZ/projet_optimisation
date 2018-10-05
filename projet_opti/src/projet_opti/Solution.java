@@ -52,8 +52,13 @@ public class Solution {
 			}
 		}
 		
-		return true;
-		
+		return true;	
+	}
+	
+	public Solution genereVoisin() {
+		Solution newSol = new Solution(this.listObjets);
+		int i = (int) Math.random() * newSol.listObjets.size();
+		return newSol;
 	}
 	
 	public String toString() {
