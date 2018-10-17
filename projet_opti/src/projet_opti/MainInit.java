@@ -93,6 +93,10 @@ public class MainInit {
 		for(int i = 0; i < listObjet.size(); i++) {
 			listObjet.get(i).setValeur(datasValeurs.get(i));
 		}
+		//on set les id d'objets
+		for(int i = 0; i < listObjet.size(); i++) {
+			listObjet.get(i).setId(i);
+		}
 		buff.close(); 
 	}
 
