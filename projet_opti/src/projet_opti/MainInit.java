@@ -12,16 +12,28 @@ import java.util.Comparator;
 import java.util.List;
 
 public class MainInit {
+	/**
+	 * Méthode permettant de trier les objets de la liste en entré en fonction des valeurs d'objet
+	 * @param listObjet
+	 */
 	static void triObjets(List<Objet> listObjet) {
 		Collections.sort(listObjet, new Comparator<Objet>() {
-		    @Override
-		    public int compare(Objet o1, Objet o2) {
-		        return o1.getValeur().compareTo(o2.getValeur());
-		    }
+			@Override
+			public int compare(Objet o1, Objet o2) {
+				return o1.getValeur().compareTo(o2.getValeur());
+			}
 		});
 		Collections.reverse(listObjet);
 	}
 
+	/**
+	 * Méthode permettant de lire le fichier en entrée et initialise les objets, le sac et les incompatibilités
+	 * @param f
+	 * @param listObjet
+	 * @param listIncompatibilite
+	 * @param sac
+	 * @throws IOException
+	 */
 	static void litFichierEtInitObjets(File f, List<Objet> listObjet, List<Incompatibilite> listIncompatibilite, Sac sac) throws IOException {
 		InputStream fichier = new FileInputStream(f);
 		InputStreamReader lecture = new InputStreamReader(fichier);
@@ -45,16 +57,16 @@ public class MainInit {
 					Objet objet = new Objet();
 					listObjet.add(objet);
 				}
-				
+
 				//initialisation des incompatibilite
 				for(int i = 0; i < Integer.parseInt(valeurs[2]); i++) {
 					Incompatibilite incompatibilite = new Incompatibilite();
 					listIncompatibilite.add(incompatibilite);
 				}
-				
+
 				sac.setPoidsMax(Integer.parseInt(valeurs[3]));
 			}
-			
+
 			if(compteur == 1) {// on est dans le 1er bloc => poids des objets
 				for(int i= 0; i < valeurs.length; i++) {
 					datasPoids.add(Integer.parseInt(valeurs[i]));
@@ -66,7 +78,7 @@ public class MainInit {
 					datasValeurs.add(Integer.parseInt(valeurs[i]));
 				}
 			}
-			
+
 			if(compteur == 3) {// on est dans le 3e bloc => incompatibilités
 				listIncompatibilite.get(compteur_incomp).setObjet1(Integer.parseInt(valeurs[1])-1);
 				listIncompatibilite.get(compteur_incomp).setObjet2(Integer.parseInt(valeurs[2])-1);
@@ -82,5 +94,21 @@ public class MainInit {
 			listObjet.get(i).setValeur(datasValeurs.get(i));
 		}
 		buff.close(); 
+	}
+
+	/**
+	 * Méthode permettant de remplir le sac une première fois avec les objets ayant la plus grande valeur
+	 * @param sac
+	 * @param listObjet
+	 */
+	static void rempliSac(Sac sac, List<Objet> listObjet) {
+		int compteur = 0;
+		while(sac.getPoidsActuel() + listObjet.get(compteur).getPoids() <= sac.getPoidsMax()) {
+			sac.getListObjets().add(listObjet.get(compteur));
+			sac.setPoidsActuel(sac.getPoidsActuel() + listObjet.get(compteur).getPoids());
+			sac.setValeur(sac.getValeur() + listObjet.get(compteur).getValeur());
+			listObjet.get(compteur).setDansSac(true);
+			compteur ++;
+		}
 	}
 }

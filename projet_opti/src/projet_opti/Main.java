@@ -13,9 +13,11 @@ public class Main {
 		List<Objet> listObjet = new ArrayList<>();
 		List<Incompatibilite> listIncompatibilite = new ArrayList<>();
 		Sac sac = new Sac();
+		sac.setPoidsActuel(0);
 		File f = new File("../projet_opti/conf/1I1");	
 		MainInit.litFichierEtInitObjets(f, listObjet, listIncompatibilite, sac);
 		MainInit.triObjets(listObjet);
+		MainInit.rempliSac(sac, listObjet);
 		
 		Solution s = new Solution(listObjet);
 		//System.out.println(s);

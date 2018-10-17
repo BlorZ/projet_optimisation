@@ -1,6 +1,7 @@
 package projet_opti;
 
 public class Objet {
+	private int id;
 	private int poids;
 	private Integer valeur;
 	private boolean dansSac;
@@ -25,10 +26,18 @@ public class Objet {
 		this.valeur = valeur;
 	}
 	
-	public void setDansSac(Boolean valeur) {
+	public void setDansSac(boolean valeur) {
 		this.dansSac = valeur;
 	}
 	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public boolean estDansSac() {
 		if (dansSac) {
 			return true;
