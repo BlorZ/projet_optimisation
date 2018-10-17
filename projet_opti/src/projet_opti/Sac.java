@@ -8,10 +8,10 @@ public class Sac {
 	private int valeur;
 	private int poidsActuel;
 	private int poidsMax;
-	
-	public Sac() {
+
+	public Sac(List<Objet> _listObjets) {
 		super();
-		listObjets = new ArrayList<>();
+		this.listObjets = new ArrayList<Objet>(_listObjets);
 	}
 
 	public List<Objet> getListObjets() {
@@ -44,5 +44,53 @@ public class Sac {
 
 	public void setPoidsActuel(int poidsActuel) {
 		this.poidsActuel = poidsActuel;
+	}
+
+	int calculPoids() {
+		int p = 0;
+		for (Objet o : listObjets) {
+			if (o.estDansSac())
+				p += o.getPoids();
+		}
+		return p;
+	}
+
+	int calculValeur() {
+		int v = 0;
+		for (Objet o : listObjets) {
+			if (o.estDansSac())
+				v += o.getValeur();
+		}
+		return v;
+	}
+
+	void majSac(List<Incompatibilite> listIncompatibilite) {
+		this.poidsActuel = calculPoids();
+		this.valeur = calculValeur();
+		//on repère les incompatibilites
+		for(Objet o : this.listObjets) {
+			for(Objet o2 : this.listObjets) {
+				if(MainInit.checkIncompatibilite(o, o2, listIncompatibilite)) {
+					this.valeur -= 1000;
+				}
+			}
+		}
+	}
+
+	int compteIncompatibilite(List<Incompatibilite> listIncompatibilite) {
+		int nbIcomp = 0;
+		//on repère les incompatibilites
+		for(Objet o : this.listObjets) {
+			for(Objet o2 : this.listObjets) {
+				if(MainInit.checkIncompatibilite(o, o2, listIncompatibilite)) {
+					nbIcomp ++;
+				}
+			}
+		}
+		return nbIcomp;
+	}
+	
+	public String toString() {
+		return "valeur du sac : " + this.getValeur() + "| poids du sac : " + this.poidsActuel;
 	}
 }

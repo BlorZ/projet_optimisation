@@ -105,7 +105,7 @@ public class MainInit {
 	 * @param sac
 	 * @param listObjet
 	 */
-	static void rempliSac(Sac sac, List<Objet> listObjet) {
+	static void rempliSac(Sac sac, List<Objet> listObjet, List<Incompatibilite> listIncompatibilite) {
 		int compteur = 0;
 		while(sac.getPoidsActuel() + listObjet.get(compteur).getPoids() <= sac.getPoidsMax()) {
 			sac.getListObjets().add(listObjet.get(compteur));
@@ -114,5 +114,45 @@ public class MainInit {
 			listObjet.get(compteur).setDansSac(true);
 			compteur ++;
 		}
+	}
+
+	static boolean checkIncompatibilite(Objet o, Objet o2, List<Incompatibilite> listIncompatibilite) {
+		for(Incompatibilite i : listIncompatibilite) {
+			if((o.getId() == i.getObjet1() && o2.getId() == i.getObjet2())
+					|| (o.getId() == i.getObjet2() && o2.getId() == i.getObjet1())){
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * Méthode permettant de d'enlever les incompatibilités du sac en ne gardant que les meilleures valeurs
+	 * @param sac
+	 * @param listIncompatibilite
+	 */
+	public static Sac sacCompatible(Sac sac, List<Incompatibilite> listIncompatibilite) {
+		int valeur = Integer.MIN_VALUE;
+		while(sac.getValeur() > valeur && sac.compteIncompatibilite(listIncompatibilite) != 0) {
+			Objet o = new Objet();
+			Sac sacTmp = new Sac(sac.getListObjets());
+			sacTmp.setPoidsMax(sac.getPoidsMax());
+			sacTmp.majSac(listIncompatibilite);
+			for(int i = 0; i< sac.getListObjets().size(); i++) {
+				o = sacTmp.getListObjets().get(i);
+				sacTmp.getListObjets().remove(o);
+				sacTmp.majSac(listIncompatibilite);
+				if(sacTmp.getValeur() > sac.getValeur()) {
+					valeur = sac.getValeur();
+					sac = new Sac(sacTmp.getListObjets());
+					sac.setPoidsMax(sacTmp.getPoidsMax());
+					sac.majSac(listIncompatibilite);
+				}
+				sacTmp.getListObjets().add(o);
+				sacTmp.majSac(listIncompatibilite);
+			}
+		}		
+		return sac;
 	}
 }
