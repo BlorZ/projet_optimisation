@@ -178,5 +178,34 @@ public class MainInit {
 		}
 		return sac;
 	}
+	
+	
+	public static Univers generationUnivers(Objet o,List<Objet> listObjet, List<Incompatibilite> listIncompatibilite, int id) {
+		
+		Univers univers = new Univers();
+		univers.setId(id);
+		
+		for(Objet o2 : listObjet) {
+			if(!checkIncompatibilite(o, o2, listIncompatibilite))
+				univers.getListObjets().add(o2);
+		}
+		return univers;
+	}
+	
+	
+	public static boolean isUniversTheSame(Univers u1, Univers u2) {
+		
+		if(u1.getListObjets().size() != u2.getListObjets().size())
+			return false;
+		
+		for(Objet o : u1.getListObjets()) {
+			if(!u2.getListObjets().contains(o))
+				return false;
+		}
+		return true;
+	}
+	
+	
+	
 }
 
