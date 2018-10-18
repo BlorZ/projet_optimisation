@@ -17,13 +17,15 @@ public class Main {
 		File f = new File("../projet_opti/conf/1I1");	
 		MainInit.litFichierEtInitObjets(f, listObjet, listIncompatibilite, sac);
 		MainInit.triObjets(listObjet);
-		MainInit.rempliSac(sac, listObjet, listIncompatibilite);
+		MainInit.rempliSacSansContraintes(sac, listObjet, listIncompatibilite);
 		sac.majSac(listIncompatibilite);
 		sac = MainInit.sacCompatible(sac, listIncompatibilite);
 		
-		Solution s = new Solution(listObjet);
-		//System.out.println(s);
-		System.out.println(s.estRealisable(sac.getPoidsMax(), listIncompatibilite));
+		sac = MainInit.rempliSacAvecContraintes(sac, listIncompatibilite, listObjet);
+		
+//		Solution s = new Solution(listObjet);
+//		//System.out.println(s);
+//		System.out.println(s.estRealisable(sac.getPoidsMax(), listIncompatibilite));
 
 		long stop = System.currentTimeMillis();
 		System.out.println("Solution trouvée en "+ (stop - start) + " ms");

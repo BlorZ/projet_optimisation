@@ -105,7 +105,7 @@ public class MainInit {
 	 * @param sac
 	 * @param listObjet
 	 */
-	static void rempliSac(Sac sac, List<Objet> listObjet, List<Incompatibilite> listIncompatibilite) {
+	static void rempliSacSansContraintes(Sac sac, List<Objet> listObjet, List<Incompatibilite> listIncompatibilite) {
 		int compteur = 0;
 		while(sac.getPoidsActuel() + listObjet.get(compteur).getPoids() <= sac.getPoidsMax()) {
 			sac.getListObjets().add(listObjet.get(compteur));
@@ -116,6 +116,13 @@ public class MainInit {
 		}
 	}
 
+	/**
+	 * Méthode permettant de voir si deux objets sont compatibles ou non
+	 * @param o
+	 * @param o2
+	 * @param listIncompatibilite
+	 * @return
+	 */
 	static boolean checkIncompatibilite(Objet o, Objet o2, List<Incompatibilite> listIncompatibilite) {
 		for(Incompatibilite i : listIncompatibilite) {
 			if((o.getId() == i.getObjet1() && o2.getId() == i.getObjet2())
@@ -155,4 +162,21 @@ public class MainInit {
 		}		
 		return sac;
 	}
+
+	public static Sac rempliSacAvecContraintes(Sac sac, List<Incompatibilite> listIncompatibilite, List<Objet> listObjets) {
+		for(int i=0; i< listObjets.size(); i++) {
+			if((!listObjets.get(i).estDansSac()) && (sac.getPoidsActuel() + listObjets.get(i).getPoids() <= sac.getPoidsMax())) {
+				sac.getListObjets().add(listObjets.get(i));
+				listObjets.get(i).setDansSac(true);
+				sac.majSac(listIncompatibilite);
+				if(sac.compteIncompatibilite(listIncompatibilite) != 0) {
+					sac.getListObjets().remove(listObjets.get(i));
+					listObjets.get(i).setDansSac(false);
+					sac.majSac(listIncompatibilite);
+				}
+			}
+		}
+		return sac;
+	}
 }
+

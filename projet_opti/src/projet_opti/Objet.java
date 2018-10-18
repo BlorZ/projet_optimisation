@@ -46,7 +46,7 @@ public class Objet {
 	}
 	
 	public String toString() {
-		String s = this.getPoids() + " " + this.getValeur() + " " + this.estDansSac();
+		String s = this.getId() + " " + this.getPoids() + " " + this.getValeur() + " " + this.estDansSac();
 		return s;	
 	}
 	
