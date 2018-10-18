@@ -20,7 +20,7 @@ public class MainInit {
 		Collections.sort(listObjet, new Comparator<Objet>() {
 			@Override
 			public int compare(Objet o1, Objet o2) {
-				return o1.getValeur().compareTo(o2.getValeur());
+				return o1.getRatio().compareTo(o2.getRatio());
 			}
 		});
 		Collections.reverse(listObjet);
@@ -92,6 +92,10 @@ public class MainInit {
 		//on set la valeur des objets
 		for(int i = 0; i < listObjet.size(); i++) {
 			listObjet.get(i).setValeur(datasValeurs.get(i));
+		}
+		//on set le ratio des objets
+		for(int i = 0; i < listObjet.size(); i++) {
+			listObjet.get(i).setRatio(listObjet.get(i).getPoids() / listObjet.get(i).getValeur());
 		}
 		//on set les id d'objets
 		for(int i = 0; i < listObjet.size(); i++) {

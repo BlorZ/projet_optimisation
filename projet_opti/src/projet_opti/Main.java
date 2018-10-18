@@ -9,6 +9,7 @@ public class Main {
 
 
 	public static void main(String[] args) throws IOException {
+		
 		long start = System.currentTimeMillis();
 		List<Objet> listObjet = new ArrayList<>();
 		List<Incompatibilite> listIncompatibilite = new ArrayList<>();
