@@ -5,9 +5,11 @@ public class Objet {
 	private int poids;
 	private Integer valeur;
 	private Integer ratio;
+	private boolean dansSac;
 	
 	public Objet() {
 		super();
+		dansSac = false;
 	}
 
 	public int getPoids() {
@@ -40,6 +42,17 @@ public class Objet {
 
 	public void setRatio(Integer ratio) {
 		this.ratio = ratio;
+	}
+	
+	public void setDansSac(boolean valeur) {
+		this.dansSac = valeur;
+	}
+
+	public boolean estDansSac() {
+		if (dansSac) {
+			return true;
+		}
+		return false;
 	}
 
 	public String toString() {

@@ -27,15 +27,24 @@ System.out.println("Création de la liste d'univers.");
 		
 		//Création de la liste d'univers
 		List<Univers> listUnivers = new ArrayList<>();
-				
+		boolean diff = true;
 		
 		//Fonction de création d'un univers
 		for(Objet o : listObjet) {
+			diff = true;
 			Univers u = new Univers();
 			u = MainInit.generationUnivers(o, listObjet, listIncompatibilite);
-			if(!listUnivers.contains(u))
+			for(Univers u1 : listUnivers) {
+				if(MainInit.isUniversTheSame(u1, u)) {
+					diff = false;
+				}
+			}
+			if(diff == true) {
 				listUnivers.add(u);
+				System.out.println("Nombre d'objets dans l'univers : " + u.getListObjets().size());
+			}
 		}
+		System.out.println("Nombre d'univers générés : " + listUnivers.size());
 
 System.out.println("... ok\n");
 		
@@ -88,9 +97,33 @@ System.out.println("... ok\n");
 //		//System.out.println(s);
 //		System.out.println(s.estRealisable(sac.getPoidsMax(), listIncompatibilite));
 
-		long stop = System.currentTimeMillis();
-		System.out.println("Solution trouvée en "+ (stop - start) + " ms");
-		System.out.println(sac.toString());
+		Sac lastSac = new Sac();
+		lastSac.setPoidsMax(sac.getPoidsMax());
+				
+		
+		MainInit.rempliLastSac(lastSac, sac.getListObjets());
+		lastSac.majSac_sanscompat(lastSac.getListObjets());
+		
+		
+		Solution solution = new Solution(lastSac.getListObjets());		
+		solution.evaluer();
+		
+		for(Objet o : lastSac.getListObjets()) {
+			if(o.estDansSac() == false)
+				System.out.println("Objet : " +o.getId() + " est " + o.estDansSac());
+		}
+		
+		System.out.println(lastSac.compteIncompatibilite(listIncompatibilite));
+		
+		if(lastSac.compteIncompatibilite(listIncompatibilite) == 0) {
+			long stop = System.currentTimeMillis();
+			System.out.println("Solution trouvée en "+ (stop - start) + " ms");
+			System.out.println(lastSac.toString());
+		} else {
+			long stop = System.currentTimeMillis();
+			System.out.println("Gros naze trouvé en "+ (stop - start) + " ms");
+			System.out.println(lastSac.toString());
+		}
 	}	
 }
 

@@ -123,6 +123,6 @@ public class Sac {
 	}
 	
 	public String toString() {
-		return "valeur du sac : " + this.getValeur() + "| poids du sac : " + this.poidsActuel;
+		return "valeur du sac : " + this.getValeur() + "| poids du sac : " + this.poidsActuel + "| nb d'objets : " + this.listObjets.size();
 	}
 }

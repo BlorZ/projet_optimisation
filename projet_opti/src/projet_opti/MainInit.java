@@ -145,7 +145,7 @@ public class MainInit {
 				return true;
 			}
 		}
-
+		
 		return false;
 	}
 
@@ -197,12 +197,21 @@ public class MainInit {
 	
 	public static Univers generationUnivers(Objet o, List<Objet> listObjet, List<Incompatibilite> listIncompatibilite) {
 		
+		boolean zizi;
 		Univers univers = new Univers();
+		univers.getListObjets().add(o);
 		
 		for(Objet o2 : listObjet) {
-			if(!checkIncompatibilite(o, o2, listIncompatibilite))
+			zizi = true;
+			for(Objet o1 : univers.getListObjets()) {
+				if(checkIncompatibilite(o1, o2, listIncompatibilite) || univers.getListObjets().contains(o2))
+					zizi = false;
+			}
+			
+			if(zizi == true)
 				univers.getListObjets().add(o2);
 		}
+		
 		return univers;
 	}
 	
@@ -219,6 +228,16 @@ public class MainInit {
 		return true;
 	}
 	
+	static void rempliLastSac(Sac sac, List<Objet> listObjet) {
+		
+		for(Objet o : listObjet) {
+			sac.getListObjets().add(o);
+			sac.setPoidsActuel(sac.getPoidsActuel() + o.getPoids());
+			sac.setValeur(sac.getValeur() + o.getValeur());
+			o.setDansSac(true);
+		}
+		
+	}
 	
 	
 }
