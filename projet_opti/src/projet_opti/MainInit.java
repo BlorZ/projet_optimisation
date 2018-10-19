@@ -24,7 +24,15 @@ public class MainInit {
 			}
 		});
 		Collections.reverse(listObjet);
-}
+	}
+	
+	static void printObjets(List<Objet> listObjet) {
+		List<Objet> list = new ArrayList<>();
+		list = listObjet;
+		for(Objet o : list) {
+			System.out.println(o.getRatio());
+		}
+	}
 
 	/**
 	 * Méthode permettant de lire le fichier en entrée et initialise les objets, le sac et les incompatibilités
@@ -113,11 +121,12 @@ public class MainInit {
 	 */
 	static void rempliSacSansContraintes(Sac sac, List<Objet> listObjet) {
 		int compteur = 0;
-		while(sac.getPoidsActuel() + listObjet.get(compteur).getPoids() <= sac.getPoidsMax()) {
-			sac.getListObjets().add(listObjet.get(compteur));
-			sac.setPoidsActuel(sac.getPoidsActuel() + listObjet.get(compteur).getPoids());
-			sac.setValeur(sac.getValeur() + listObjet.get(compteur).getValeur());
-			listObjet.get(compteur).setDansSac(true);
+		while(sac.getPoidsActuel() < sac.getPoidsMax() && compteur < listObjet.size()) {
+			if(sac.getPoidsActuel() + listObjet.get(compteur).getPoids() <= sac.getPoidsMax()) {
+				sac.getListObjets().add(listObjet.get(compteur));
+				sac.setPoidsActuel(sac.getPoidsActuel() + listObjet.get(compteur).getPoids());
+				sac.setValeur(sac.getValeur() + listObjet.get(compteur).getValeur());
+			}
 			compteur ++;
 		}
 	}
@@ -169,21 +178,21 @@ public class MainInit {
 		return sac;
 	}
 
-	public static Sac rempliSacAvecContraintes(Sac sac, List<Incompatibilite> listIncompatibilite, List<Objet> listObjets) {
-		for(int i=0; i< listObjets.size(); i++) {
-			if((!listObjets.get(i).estDansSac()) && (sac.getPoidsActuel() + listObjets.get(i).getPoids() <= sac.getPoidsMax())) {
-				sac.getListObjets().add(listObjets.get(i));
-				listObjets.get(i).setDansSac(true);
-				sac.majSac(listIncompatibilite);
-				if(sac.compteIncompatibilite(listIncompatibilite) != 0) {
-					sac.getListObjets().remove(listObjets.get(i));
-					listObjets.get(i).setDansSac(false);
-					sac.majSac(listIncompatibilite);
-				}
-			}
-		}
-		return sac;
-	}
+//	public static Sac rempliSacAvecContraintes(Sac sac, List<Incompatibilite> listIncompatibilite, List<Objet> listObjets) {
+//		for(int i=0; i< listObjets.size(); i++) {
+//			if((!listObjets.get(i).estDansSac()) && (sac.getPoidsActuel() + listObjets.get(i).getPoids() <= sac.getPoidsMax())) {
+//				sac.getListObjets().add(listObjets.get(i));
+//				listObjets.get(i).setDansSac(true);
+//				sac.majSac(listIncompatibilite);
+//				if(sac.compteIncompatibilite(listIncompatibilite) != 0) {
+//					sac.getListObjets().remove(listObjets.get(i));
+//					listObjets.get(i).setDansSac(false);
+//					sac.majSac(listIncompatibilite);
+//				}
+//			}
+//		}
+//		return sac;
+//	}
 	
 	
 	public static Univers generationUnivers(Objet o, List<Objet> listObjet, List<Incompatibilite> listIncompatibilite) {

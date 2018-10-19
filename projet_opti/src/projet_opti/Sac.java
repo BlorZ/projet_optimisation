@@ -13,6 +13,14 @@ public class Sac {
 		super();
 		this.listObjets = new ArrayList<Objet>(_listObjets);
 	}
+	
+	public Sac() {
+		super();
+		listObjets = new ArrayList<>();
+		valeur = 0;
+		poidsActuel = 0;
+		poidsMax = 0;
+	}
 
 	public List<Objet> getListObjets() {
 		return listObjets;
@@ -48,7 +56,7 @@ public class Sac {
 
 	int calculPoids() {
 		int p = 0;
-		for (Objet o : listObjets) {
+		for (Objet o : this.listObjets) {
 //			if (o.estDansSac())
 			p += o.getPoids();
 		}
@@ -56,6 +64,24 @@ public class Sac {
 	}
 
 	int calculValeur() {
+		int v = 0;
+		for (Objet o : this.listObjets) {
+			//if (o.estDansSac())
+				v += o.getValeur();
+		}
+		return v;
+	}
+	
+	int calculPoids_list(List<Objet> listObjets) {
+		int p = 0;
+		for (Objet o : listObjets) {
+//			if (o.estDansSac())
+			p += o.getPoids();
+		}
+		return p;
+	}
+	
+	int calculValeur_list(List<Objet> listObjets) {
 		int v = 0;
 		for (Objet o : listObjets) {
 			//if (o.estDansSac())
@@ -77,9 +103,9 @@ public class Sac {
 		}
 	}
 	
-	void majSac_sanscompat() {
-		this.poidsActuel = calculPoids();
-		this.valeur = calculValeur();
+	void majSac_sanscompat(List<Objet> listObjets) {
+		this.poidsActuel = calculPoids_list(listObjets);
+		this.valeur = calculValeur_list(listObjets);
 	}
 
 	
