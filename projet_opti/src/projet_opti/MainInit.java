@@ -13,18 +13,18 @@ import java.util.List;
 
 public class MainInit {
 	/**
-	 * Méthode permettant de trier les objets de la liste en entré en fonction des valeurs d'objet
+	 * Méthode permettant de trier les objets de la liste en entré en fonction des ratios d'objet
 	 * @param listObjet
 	 */
 	static void triObjets(List<Objet> listObjet) {
 		Collections.sort(listObjet, new Comparator<Objet>() {
 			@Override
 			public int compare(Objet o1, Objet o2) {
-				return o1.getValeur().compareTo(o2.getValeur());
+				return o1.getRatio().compareTo(o2.getRatio());
 			}
 		});
 		Collections.reverse(listObjet);
-	}
+}
 
 	/**
 	 * Méthode permettant de lire le fichier en entrée et initialise les objets, le sac et les incompatibilités
@@ -93,6 +93,12 @@ public class MainInit {
 		for(int i = 0; i < listObjet.size(); i++) {
 			listObjet.get(i).setValeur(datasValeurs.get(i));
 		}
+		
+		//on set le ratio des objets
+		for(int i = 0; i < listObjet.size(); i++) {
+			listObjet.get(i).setRatio(listObjet.get(i).getPoids() / listObjet.get(i).getValeur());
+		}
+		
 		//on set les id d'objets
 		for(int i = 0; i < listObjet.size(); i++) {
 			listObjet.get(i).setId(i);
@@ -105,7 +111,7 @@ public class MainInit {
 	 * @param sac
 	 * @param listObjet
 	 */
-	static void rempliSacSansContraintes(Sac sac, List<Objet> listObjet, List<Incompatibilite> listIncompatibilite) {
+	static void rempliSacSansContraintes(Sac sac, List<Objet> listObjet) {
 		int compteur = 0;
 		while(sac.getPoidsActuel() + listObjet.get(compteur).getPoids() <= sac.getPoidsMax()) {
 			sac.getListObjets().add(listObjet.get(compteur));
@@ -180,10 +186,9 @@ public class MainInit {
 	}
 	
 	
-	public static Univers generationUnivers(Objet o,List<Objet> listObjet, List<Incompatibilite> listIncompatibilite, int id) {
+	public static Univers generationUnivers(Objet o, List<Objet> listObjet, List<Incompatibilite> listIncompatibilite) {
 		
 		Univers univers = new Univers();
-		univers.setId(id);
 		
 		for(Objet o2 : listObjet) {
 			if(!checkIncompatibilite(o, o2, listIncompatibilite))

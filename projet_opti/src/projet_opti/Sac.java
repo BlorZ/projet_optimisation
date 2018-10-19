@@ -49,8 +49,8 @@ public class Sac {
 	int calculPoids() {
 		int p = 0;
 		for (Objet o : listObjets) {
-			if (o.estDansSac())
-				p += o.getPoids();
+//			if (o.estDansSac())
+			p += o.getPoids();
 		}
 		return p;
 	}
@@ -58,7 +58,7 @@ public class Sac {
 	int calculValeur() {
 		int v = 0;
 		for (Objet o : listObjets) {
-			if (o.estDansSac())
+			//if (o.estDansSac())
 				v += o.getValeur();
 		}
 		return v;
@@ -76,7 +76,13 @@ public class Sac {
 			}
 		}
 	}
+	
+	void majSac_sanscompat() {
+		this.poidsActuel = calculPoids();
+		this.valeur = calculValeur();
+	}
 
+	
 	int compteIncompatibilite(List<Incompatibilite> listIncompatibilite) {
 		int nbIcomp = 0;
 		//on repère les incompatibilites

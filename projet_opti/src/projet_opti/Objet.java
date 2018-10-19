@@ -4,6 +4,7 @@ public class Objet {
 	private int id;
 	private int poids;
 	private Integer valeur;
+	private Integer ratio;
 	private boolean dansSac;
 	
 	public Objet() {
@@ -38,6 +39,14 @@ public class Objet {
 		this.id = id;
 	}
 
+	public Integer getRatio() {
+		return ratio;
+	}
+
+	public void setRatio(Integer ratio) {
+		this.ratio = ratio;
+	}
+
 	public boolean estDansSac() {
 		if (dansSac) {
 			return true;
@@ -46,7 +55,7 @@ public class Objet {
 	}
 	
 	public String toString() {
-		String s = this.getId() + " " + this.getPoids() + " " + this.getValeur() + " " + this.estDansSac();
+		String s = this.getId() + " " + this.getPoids() + " " + this.getValeur() + " " + this.ratio + " " + this.estDansSac();
 		return s;	
 	}
 	
