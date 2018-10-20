@@ -18,13 +18,18 @@ public class MainInit {
 	 */
 	static void triObjets(List<Objet> listObjet) {
 		Collections.sort(listObjet, new Comparator<Objet>() {
+			
 			@Override
 			public int compare(Objet o1, Objet o2) {
-				return o1.getRatio().compareTo(o2.getRatio());
+				int value1 = o1.getRatio().compareTo(o2.getRatio());
+				if(value1 == 0) {
+					return o1.getValeur().compareTo(o2.getValeur());
+				} else return value1;				
 			}
+			
 		});
 		Collections.reverse(listObjet);
-	}
+}
 
 	/**
 	 * Méthode permettant de lire le fichier en entrée et initialise les objets, le sac et les incompatibilités
@@ -95,7 +100,7 @@ public class MainInit {
 		}
 		//on set le ratio des objets
 		for(int i = 0; i < listObjet.size(); i++) {
-			listObjet.get(i).setRatio(listObjet.get(i).getPoids() / listObjet.get(i).getValeur());
+			listObjet.get(i).setRatio(listObjet.get(i).getValeur() / listObjet.get(i).getPoids());
 		}
 		//on set les id d'objets
 		for(int i = 0; i < listObjet.size(); i++) {
