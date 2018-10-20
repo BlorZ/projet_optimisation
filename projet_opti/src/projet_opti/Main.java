@@ -103,17 +103,13 @@ System.out.println("... ok\n");
 		
 		MainInit.rempliLastSac(lastSac, sac.getListObjets());
 		lastSac.majSac_sanscompat(lastSac.getListObjets());
-		
-		
-		Solution solution = new Solution(lastSac.getListObjets());		
-		solution.evaluer();
-		
+			
 		for(Objet o : lastSac.getListObjets()) {
 			if(o.estDansSac() == false)
 				System.out.println("Objet : " +o.getId() + " est " + o.estDansSac());
 		}
 		
-		System.out.println(lastSac.compteIncompatibilite(listIncompatibilite));
+		System.out.println("Nombres d'incompatibilités : " + lastSac.compteIncompatibilite(listIncompatibilite));
 		
 		if(lastSac.compteIncompatibilite(listIncompatibilite) == 0) {
 			long stop = System.currentTimeMillis();
