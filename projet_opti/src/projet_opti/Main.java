@@ -15,7 +15,7 @@ public class Main {
 		List<Incompatibilite> listIncompatibilite = new ArrayList<>();
 		Sac sac = new Sac(listObjet);
 		sac.setPoidsActuel(0);
-		File f = new File("../projet_opti/conf/1I1");	
+		File f = new File("../projet_opti/conf/10I5");	
 		MainInit.litFichierEtInitObjets(f, listObjet, listIncompatibilite, sac);
 		MainInit.triObjets(listObjet);
 		MainInit.rempliSacSansContraintes(sac, listObjet, listIncompatibilite);
