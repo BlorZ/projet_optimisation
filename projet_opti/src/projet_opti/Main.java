@@ -17,7 +17,7 @@ public class Main {
 				
 System.out.println("Lecture du fichier.");
 		
-		File f = new File("../projet_opti/conf/1I1");	
+		File f = new File("../projet_opti/conf/10I1");	
 		MainInit.litFichierEtInitObjets(f, listObjet, listIncompatibilite, sac);
 		sac.setPoidsActuel(0);
 		
@@ -129,4 +129,3 @@ System.out.println("... ok\n");
 		}
 	}	
 }
-
