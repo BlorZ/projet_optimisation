@@ -21,6 +21,12 @@ System.out.println("Lecture du fichier.");
 		MainInit.litFichierEtInitObjets(f, listObjet, listIncompatibilite, sac);
 		sac.setPoidsActuel(0);
 		
+		//Tri de la liste des objets
+		MainInit.triObjets(listObjet);
+		
+		MainInit.generationIndiceIncompat(listObjet, listIncompatibilite);
+		//MainInit.printObjets(listObjet);
+				
 System.out.println("... ok\n");
 		
 System.out.println("Création de la liste d'univers.");
@@ -51,8 +57,9 @@ System.out.println("... ok\n");
 System.out.println("Tri de la liste d'objets dans chaque univers.");
 		//Tri des objets dans l'univers
 		for(Univers u : listUnivers) {
+			MainInit.generationIndiceIncompat(u.getListObjets(), listIncompatibilite);
 			MainInit.triObjets(u.getListObjets());
-			//MainInit.printObjets(u.getListObjets());
+//			MainInit.printObjets(u.getListObjets());
 		}
 
 System.out.println("... ok\n");

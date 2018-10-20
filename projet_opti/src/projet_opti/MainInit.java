@@ -23,20 +23,24 @@ public class MainInit {
 			public int compare(Objet o1, Objet o2) {
 				int value1 = o1.getRatio().compareTo(o2.getRatio());
 				if(value1 == 0) {
-					return o1.getValeur().compareTo(o2.getValeur());
-				} else return value1;				
+					int value2 = o1.getValeur().compareTo(o2.getValeur());
+					if(value2 == 0) {
+						return o2.getIndiceCompat().compareTo(o1.getIndiceCompat());
+					} else return value2;
+				}
+				return value1;
 			}
-			
+					
 		});
 		Collections.reverse(listObjet);
 	}
-		
+	
 	
 	static void printObjets(List<Objet> listObjet) {
 		List<Objet> list = new ArrayList<>();
 		list = listObjet;
 		for(Objet o : list) {
-			System.out.println(o.getRatio());
+			System.out.println(o.getIndiceCompat());
 		}
 	}
 
@@ -184,37 +188,51 @@ public class MainInit {
 		return sac;
 	}
 
-//	public static Sac rempliSacAvecContraintes(Sac sac, List<Incompatibilite> listIncompatibilite, List<Objet> listObjets) {
-//		for(int i=0; i< listObjets.size(); i++) {
-//			if((!listObjets.get(i).estDansSac()) && (sac.getPoidsActuel() + listObjets.get(i).getPoids() <= sac.getPoidsMax())) {
-//				sac.getListObjets().add(listObjets.get(i));
-//				listObjets.get(i).setDansSac(true);
-//				sac.majSac(listIncompatibilite);
-//				if(sac.compteIncompatibilite(listIncompatibilite) != 0) {
-//					sac.getListObjets().remove(listObjets.get(i));
-//					listObjets.get(i).setDansSac(false);
-//					sac.majSac(listIncompatibilite);
-//				}
-//			}
-//		}
-//		return sac;
-//	}
+	public static Sac rempliSacAvecContraintes(Sac sac, List<Incompatibilite> listIncompatibilite, List<Objet> listObjets) {
+		for(int i=0; i< listObjets.size(); i++) {
+			if((!listObjets.get(i).estDansSac()) && (sac.getPoidsActuel() + listObjets.get(i).getPoids() <= sac.getPoidsMax())) {
+				sac.getListObjets().add(listObjets.get(i));
+				listObjets.get(i).setDansSac(true);
+				sac.majSac(listIncompatibilite);
+				if(sac.compteIncompatibilite(listIncompatibilite) != 0) {
+					sac.getListObjets().remove(listObjets.get(i));
+					listObjets.get(i).setDansSac(false);
+					sac.majSac(listIncompatibilite);
+				}
+			}
+		}
+		return sac;
+	}
 	
 	
-	public static Univers generationUnivers(Objet o, List<Objet> listObjet, List<Incompatibilite> listIncompatibilite) {
+	public static void generationIndiceIncompat(List<Objet> listObjets, List<Incompatibilite> listIncompatibilite) {
 		
-		boolean zizi;
+		for(Objet o : listObjets) {
+			for(Objet o1 : listObjets) {
+				if(checkIncompatibilite(o, o1, listIncompatibilite) && !o.equals(o1)) {
+					o.setIndiceCompat(o.getIndiceCompat() + 1);
+				}
+			}
+		}
+		
+	}
+	
+	
+	
+	public static Univers generationUnivers(Objet o, List<Objet> listObjets, List<Incompatibilite> listIncompatibilite) {
+		
+		boolean compat;
 		Univers univers = new Univers();
 		univers.getListObjets().add(o);
-		
-		for(Objet o2 : listObjet) {
-			zizi = true;
+						
+		for(Objet o2 : listObjets) {
+			compat = true;
 			for(Objet o1 : univers.getListObjets()) {
 				if(checkIncompatibilite(o1, o2, listIncompatibilite) || univers.getListObjets().contains(o2))
-					zizi = false;
+					compat = false;
 			}
 			
-			if(zizi == true)
+			if(compat == true)
 				univers.getListObjets().add(o2);
 		}
 		
