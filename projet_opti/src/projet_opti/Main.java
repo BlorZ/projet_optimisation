@@ -17,7 +17,7 @@ public class Main {
 				
 System.out.println("Lecture du fichier.");
 		
-		File f = new File("../projet_opti/conf/10I1");	
+		File f = new File("../projet_opti/conf/10I5");	
 		MainInit.litFichierEtInitObjets(f, listObjet, listIncompatibilite, sac);
 		sac.setPoidsActuel(0);
 		
@@ -25,7 +25,7 @@ System.out.println("Lecture du fichier.");
 		MainInit.triObjets(listObjet);
 		
 		MainInit.generationIndiceIncompat(listObjet, listIncompatibilite);
-		//MainInit.printObjets(listObjet);
+		MainInit.printObjets(listObjet);
 				
 System.out.println("... ok\n");
 		
@@ -69,8 +69,9 @@ System.out.println("Création du sac optimal.");
 		//Remplissage du sac
 //		Sac sac_tmp = new Sac();
 //		sac_tmp.setPoidsMax(sac.getPoidsMax());
-		
+
 		for(Univers u : listUnivers) {
+			
 			Sac sac_tmp = new Sac();
 			sac_tmp.setPoidsMax(sac.getPoidsMax());
 			MainInit.rempliSacSansContraintes(sac_tmp, u.getListObjets());
@@ -85,25 +86,15 @@ System.out.println("Création du sac optimal.");
 				sac = new Sac(sac_tmp.getListObjets());
 				sac.setPoidsMax(sac_tmp.getPoidsMax());
 								
-				//MainInit.rempliSacSansContraintes(sac, u.getListObjets());
 				sac.majSac_sanscompat(sac.getListObjets());
 			}
-			//System.out.println(sac.getValeur());
+
 		}
+			
+
 		
 System.out.println("... ok\n");
 		
-//		MainInit.triObjets(listObjet);
-//		MainInit.rempliSacSansContraintes(sac, listObjet, listIncompatibilite);
-//		sac.majSac(listIncompatibilite);
-//		sac = MainInit.sacCompatible(sac, listIncompatibilite);
-//		
-//		sac = MainInit.rempliSacAvecContraintes(sac, listIncompatibilite, listObjet);
-		
-//		Solution s = new Solution(listObjet);
-//		//System.out.println(s);
-//		System.out.println(s.estRealisable(sac.getPoidsMax(), listIncompatibilite));
-
 		Sac lastSac = new Sac();
 		lastSac.setPoidsMax(sac.getPoidsMax());
 				
@@ -120,11 +111,11 @@ System.out.println("... ok\n");
 		
 		if(lastSac.compteIncompatibilite(listIncompatibilite) == 0) {
 			long stop = System.currentTimeMillis();
-			System.out.println("Solution trouvée en "+ (stop - start) + " ms");
+			System.out.println("Solution trouvée en "+ (stop - start)/1000 + " s");
 			System.out.println(lastSac.toString());
 		} else {
 			long stop = System.currentTimeMillis();
-			System.out.println("Gros naze trouvé en "+ (stop - start) + " ms");
+			System.out.println("Gros naze trouvé en "+ (stop - start)/1000 + " s");
 			System.out.println(lastSac.toString());
 		}
 	}	
