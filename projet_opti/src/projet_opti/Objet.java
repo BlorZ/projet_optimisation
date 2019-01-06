@@ -2,9 +2,9 @@ package projet_opti;
 
 public class Objet {
 	private int id;
-	private int poids;
-	private Integer valeur;
-	private Integer ratio;
+	private Float poids;
+	private Float valeur;
+	private Float ratio;
 	private Integer indiceCompat;
 	private boolean dansSac;
 	
@@ -14,19 +14,19 @@ public class Objet {
 		indiceCompat = 0;
 	}
 
-	public int getPoids() {
+	public Float getPoids() {
 		return poids;
 	}
 
-	public void setPoids(int poids) {
+	public void setPoids(Float poids) {
 		this.poids = poids;
 	}
 
-	public Integer getValeur() {
+	public Float getValeur() {
 		return valeur;
 	}
 
-	public void setValeur(Integer valeur) {
+	public void setValeur(Float valeur) {
 		this.valeur = valeur;
 	}
 	
@@ -38,11 +38,11 @@ public class Objet {
 		this.id = id;
 	}
 
-	public Integer getRatio() {
+	public Float getRatio() {
 		return ratio;
 	}
 
-	public void setRatio(Integer ratio) {
+	public void setRatio(Float ratio) {
 		this.ratio = ratio;
 	}
 	

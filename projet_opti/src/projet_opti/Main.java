@@ -3,6 +3,7 @@ package projet_opti;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Main {
@@ -12,18 +13,22 @@ public class Main {
 		long start = System.currentTimeMillis();
 		
 		List<Objet> listObjet = new ArrayList<>();
+		List<Objet> listObjet0 = new ArrayList<>();
 		List<Incompatibilite> listIncompatibilite = new ArrayList<>();
 		Sac sac = new Sac(listObjet);
 				
 System.out.println("Lecture du fichier.");
 		
-		File f = new File("../projet_opti/conf/10I5");	
+		File f = new File("..\\projet_opti\\conf\\1I1");
+		MainInit.litFichierEtInitObjets(f, listObjet0, listIncompatibilite, sac);
 		MainInit.litFichierEtInitObjets(f, listObjet, listIncompatibilite, sac);
 		sac.setPoidsActuel(0);
 		
 		//Tri de la liste des objets
 		MainInit.triObjets(listObjet);
+		MainInit.triObjets(listObjet0);
 		
+		MainInit.generationIndiceIncompat(listObjet0, listIncompatibilite);
 		MainInit.generationIndiceIncompat(listObjet, listIncompatibilite);
 		MainInit.printObjets(listObjet);
 				
@@ -34,7 +39,7 @@ System.out.println("Création de la liste d'univers.");
 		//Création de la liste d'univers
 		List<Univers> listUnivers = new ArrayList<>();
 		boolean diff = true;
-		
+
 		//Fonction de création d'un univers
 		for(Objet o : listObjet) {
 			diff = true;
@@ -50,6 +55,28 @@ System.out.println("Création de la liste d'univers.");
 				System.out.println("Nombre d'objets dans l'univers : " + u.getListObjets().size());
 			}
 		}
+
+		
+		
+//		for(Objet o : listObjet0) {
+//			for(int i = 0; i<5; i++) {
+//				if(i > 0)
+//					Collections.shuffle(listObjet);
+//				diff = true;
+//				Univers u = new Univers();
+//				u = MainInit.generationUnivers(o, listObjet, listIncompatibilite);
+//				for(Univers u1 : listUnivers) {
+//					if(MainInit.isUniversTheSame(u1, u)) {
+//						diff = false;
+//					}
+//				}
+//				if(diff == true) {
+//					listUnivers.add(u);
+//					System.out.println("Nombre d'objets dans l'univers : " + u.getListObjets().size());
+//				}
+//			}
+//		}
+		
 		System.out.println("Nombre d'univers générés : " + listUnivers.size());
 
 System.out.println("... ok\n");
@@ -77,10 +104,10 @@ System.out.println("Création du sac optimal.");
 			MainInit.rempliSacSansContraintes(sac_tmp, u.getListObjets());
 			sac_tmp.majSac_sanscompat(sac_tmp.getListObjets());
 			
-			System.out.println("tmp " + sac_tmp.getPoidsActuel());
-			System.out.println("tmp " + sac_tmp.getValeur());
-			System.out.println("sac " + sac.getPoidsActuel());
-			System.out.println("sac " + sac.getValeur());
+//			System.out.println("tmp " + sac_tmp.getPoidsActuel());
+//			System.out.println("tmp " + sac_tmp.getValeur());
+//			System.out.println("sac " + sac.getPoidsActuel());
+//			System.out.println("sac " + sac.getValeur());
 			
 			if(sac_tmp.getValeur() > sac.getValeur()) {
 				sac = new Sac(sac_tmp.getListObjets());

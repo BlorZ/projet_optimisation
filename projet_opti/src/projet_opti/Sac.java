@@ -5,9 +5,9 @@ import java.util.List;
 
 public class Sac {
 	private List<Objet> listObjets;
-	private int valeur;
-	private int poidsActuel;
-	private int poidsMax;
+	private float valeur;
+	private float poidsActuel;
+	private float poidsMax;
 
 	public Sac(List<Objet> _listObjets) {
 		super();
@@ -30,27 +30,27 @@ public class Sac {
 		this.listObjets = listObjets;
 	}
 
-	public int getValeur() {
+	public float getValeur() {
 		return valeur;
 	}
 
-	public void setValeur(int valeur) {
+	public void setValeur(float valeur) {
 		this.valeur = valeur;
 	}
 
-	public int getPoidsMax() {
+	public float getPoidsMax() {
 		return poidsMax;
 	}
 
-	public void setPoidsMax(int poidsMax) {
+	public void setPoidsMax(float poidsMax) {
 		this.poidsMax = poidsMax;
 	}
 
-	public int getPoidsActuel() {
+	public float getPoidsActuel() {
 		return poidsActuel;
 	}
 
-	public void setPoidsActuel(int poidsActuel) {
+	public void setPoidsActuel(float poidsActuel) {
 		this.poidsActuel = poidsActuel;
 	}
 

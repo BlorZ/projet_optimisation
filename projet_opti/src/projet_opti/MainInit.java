@@ -40,7 +40,9 @@ public class MainInit {
 		List<Objet> list = new ArrayList<>();
 		list = listObjet;
 		for(Objet o : list) {
-			System.out.println(o.getIndiceCompat());
+//			System.out.println(o.getIndiceCompat());
+			System.out.println(o.getRatio());
+			System.out.println(o.getValeur());
 		}
 	}
 
@@ -105,11 +107,11 @@ public class MainInit {
 		}
 		//on set le poids des objets
 		for(int i = 0; i < listObjet.size(); i++) {
-			listObjet.get(i).setPoids(datasPoids.get(i));
+			listObjet.get(i).setPoids((float)datasPoids.get(i));
 		}
 		//on set la valeur des objets
 		for(int i = 0; i < listObjet.size(); i++) {
-			listObjet.get(i).setValeur(datasValeurs.get(i));
+			listObjet.get(i).setValeur((float)datasValeurs.get(i));
 		}
 		
 		//on set le ratio des objets
@@ -165,7 +167,7 @@ public class MainInit {
 	 * @param listIncompatibilite
 	 */
 	public static Sac sacCompatible(Sac sac, List<Incompatibilite> listIncompatibilite) {
-		int valeur = Integer.MIN_VALUE;
+		Float valeur = Float.MIN_VALUE;
 		while(sac.getValeur() > valeur && sac.compteIncompatibilite(listIncompatibilite) != 0) {
 			Objet o = new Objet();
 			Sac sacTmp = new Sac(sac.getListObjets());
@@ -224,6 +226,25 @@ public class MainInit {
 		boolean compat;
 		Univers univers = new Univers();
 		univers.getListObjets().add(o);
+						
+		for(Objet o2 : listObjets) {
+			compat = true;
+			for(Objet o1 : univers.getListObjets()) {
+				if(checkIncompatibilite(o1, o2, listIncompatibilite) || univers.getListObjets().contains(o2))
+					compat = false;
+			}
+			
+			if(compat == true)
+				univers.getListObjets().add(o2);
+		}
+		
+		return univers;
+	}
+	
+	public static Univers generationUnivers(List<Objet> listObjets, List<Incompatibilite> listIncompatibilite) {
+		
+		boolean compat;
+		Univers univers = new Univers();
 						
 		for(Objet o2 : listObjets) {
 			compat = true;
